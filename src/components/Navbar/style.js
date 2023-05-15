@@ -19,7 +19,6 @@ const Wrapper = styled.div`
   max-width: 1440px;
   width: 100%;
   display: flex;
-  display: flex;
   justify-content: space-between;
   align-items: center;
   color: #fff;
@@ -33,6 +32,10 @@ const Section = styled.div`
   cursor: ${({ logo }) => logo && "pointer"};
   .active {
     color: #b8ff06;
+  }
+  h3 {
+    margin: 0;
+    padding: 0;
   }
 `;
 
