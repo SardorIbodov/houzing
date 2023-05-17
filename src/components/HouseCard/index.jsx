@@ -29,11 +29,11 @@ export const HouseCard = ({ url, title, bed, bath, garage, ruler, info }) => {
         </Details>
       </Content>
       <Footer>
-        <Details.Item footer>
+        <Details.Item footer="true">
           <div className="info">$2,800/mo</div>
           <div className="subTitle">$7,500/mo</div>
         </Details.Item>
-        <Details.Item row>
+        <Details.Item row="true">
           <Icons.Resize></Icons.Resize>
           <Icons.Heart></Icons.Heart>
         </Details.Item>
