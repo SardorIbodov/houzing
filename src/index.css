@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap");
 
-
 * {
   margin: 0;
   padding: 0;
@@ -40,4 +39,11 @@ body {
   font-size: 16px;
   line-height: 24px;
   color: #0d263b;
+}
+
+.info {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #696969;
 }
