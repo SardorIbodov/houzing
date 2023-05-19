@@ -1,10 +1,12 @@
-import { useRef, useState } from "react";
+import React, { useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Dropdown } from "antd";
 import { Input, Button } from "../Generic";
 import { Container, Wrapper, Icons, MenuWrapper, Section } from "./style";
+import uzeReplace from "../../hooks/useReplace";
+import useSearch from "../../hooks/useSearch";
 
 export const Filter = () => {
-  const [open, setOpen] = useState(false);
   const countryRef = useRef(),
     regionRef = useRef(),
     cityRef = useRef(),
@@ -14,58 +16,105 @@ export const Filter = () => {
     sortRef = useRef(),
     minPriceRef = useRef(),
     maxPriceRef = useRef();
-  const menu = (
-    <MenuWrapper>
-      <h3 className="subTitle">Address</h3>
-      <Section>
-        <Input ref={countryRef} placeholder={"Country"} />
-        <Input ref={regionRef} placeholder={"Region"} />
-        <Input ref={cityRef} placeholder={"City"} />
-        <Input ref={zipRef} placeholder={"Zip code"} />
-      </Section>
-      <h3 className="subTitle">Apartment info</h3>
-      <Section>
-        <Input ref={roomsRef} placeholder={"Rooms"} />
-        <Input ref={sizeRef} placeholder={"Size"} />
-        <Input ref={sortRef} placeholder={"Sort"} />
-      </Section>
-      <h3 className="subTitle">Price</h3>
-      <Section>
-        <Input ref={minPriceRef} placeholder={"Min price"} />
-        <Input ref={maxPriceRef} placeholder={"Max price"} />
-      </Section>
-    </MenuWrapper>
-  );
 
-  const items = [
-    {
-      label: menu,
-      key: "0",
-    },
-  ];
+  const onChange = ({ target: { name, value } }) => {
+    navigate(`${location?.pathname}${uzeReplace(name, value)}`);
+  };
+  const navigate = useNavigate();
+  const location = useLocation();
+  const query = useSearch();
 
   return (
     <Wrapper>
       <Container>
         <Input
-          icon={<Icons.houses></Icons.houses>}
+          icon={<Icons.Houses></Icons.Houses>}
           placeholder={"Enter an address, neighborhood, city, or ZIP code"}
         />
         <Dropdown
-          menu={{
-            items,
+          dropdownRender={() => {
+            return (
+              <MenuWrapper>
+                <h3 className="subTitle">Address</h3>
+                <Section>
+                  <Input
+                    name="country"
+                    defaultValue={query.get("country")}
+                    onChange={onChange}
+                    ref={countryRef}
+                    placeholder={"Country"}
+                  />
+                  <Input
+                    name="region"
+                    defaultValue={query.get("region")}
+                    onChange={onChange}
+                    ref={regionRef}
+                    placeholder={"Region"}
+                  />
+                  <Input
+                    name="city"
+                    defaultValue={query.get("city")}
+                    onChange={onChange}
+                    ref={cityRef}
+                    placeholder={"City"}
+                  />
+                  <Input
+                    name="zip_code"
+                    defaultValue={query.get("zip_code")}
+                    onChange={onChange}
+                    ref={zipRef}
+                    placeholder={"Zip code"}
+                  />
+                </Section>
+                <h3 className="subTitle">Apartment info</h3>
+                <Section>
+                  <Input
+                    name="room"
+                    onChange={onChange}
+                    ref={roomsRef}
+                    placeholder={"Rooms"}
+                  />
+                  <Input
+                    name="size"
+                    onChange={onChange}
+                    ref={sizeRef}
+                    placeholder={"Size"}
+                  />
+                  <Input
+                    name="sort"
+                    onChange={onChange}
+                    ref={sortRef}
+                    placeholder={"Sort"}
+                  />
+                </Section>
+                <h3 className="subTitle">Price</h3>
+                <Section>
+                  <Input
+                    name="min_price"
+                    onChange={onChange}
+                    ref={minPriceRef}
+                    placeholder={"Min price"}
+                  />
+                  <Input
+                    name="max_price"
+                    onChange={onChange}
+                    ref={maxPriceRef}
+                    placeholder={"Max price"}
+                  />
+                </Section>
+              </MenuWrapper>
+            );
           }}
           trigger={["click"]}
-          open={open}
         >
-          <div onClick={() => setOpen(!open)}>
+          <div>
             <Button type="light">
-              <Icons.filter /> Advanced
+              <Icons.Filter /> Advanced
             </Button>
           </div>
         </Dropdown>
         <Button>
-          <Icons.search /> Search
+          <Icons.Search /> Search
         </Button>
       </Container>
     </Wrapper>

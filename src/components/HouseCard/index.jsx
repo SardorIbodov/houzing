@@ -2,36 +2,50 @@ import { Container, Content, Details, Icons, Footer } from "./style";
 import noImg from "../../assets/imgs/noimg.png";
 import { Img } from "./style";
 
-export const HouseCard = ({ url, title, bed, bath, garage, ruler, info }) => {
+export const HouseCard = ({ data = {} }) => {
+  const {
+    attachments,
+    address,
+    city,
+    country,
+    description,
+    houseDetails,
+    salePrice,
+    price,
+  } = data;
   return (
     <Container>
-      <Img src={url || noImg} />
+      <Img src={(attachments && attachments[0].imgPath) || noImg} />
       <Content>
-        <div className="subTitle">{title || "New Apartment Nice Wiew"}</div>
-        <div className="info">{info || "Quincy St, Brooklyn, NY, USA"}</div>
+        <div className="subTitle inline">
+          {city}, {country}, {description}
+        </div>
+        <div className="info">{address || "Quincy St, Brooklyn, NY, USA"}</div>
         <Details>
           <Details.Item>
             <Icons.Bed />
-            <div className="info">{bed || 0} Bed</div>
+            <div className="info">{houseDetails?.beds || 0} Bed</div>
           </Details.Item>
           <Details.Item>
             <Icons.Bath />
-            <div className="info">{bath || 0} Bath</div>
+            <div className="info">{houseDetails?.bath || 0} Bath</div>
           </Details.Item>
           <Details.Item>
             <Icons.Garage />
-            <div className="info">{garage || 0} Garage</div>
+            <div className="info">{houseDetails?.garage || 0} Garage</div>
           </Details.Item>
           <Details.Item>
             <Icons.Ruler />
-            <div className="info">{ruler || 0} Sq Ft</div>
+            <div className="info">{houseDetails?.area || 0} Sq Ft</div>
           </Details.Item>
         </Details>
       </Content>
       <Footer>
         <Details.Item footer="true">
-          <div className="info">$2,800/mo</div>
-          <div className="subTitle">$7,500/mo</div>
+          <div className="info" style={{ textDecoration: "line-through" }}>
+            ${price || 0}/mo
+          </div>
+          <div className="subTitle">${salePrice || 0}/mo</div>
         </Details.Item>
         <Details.Item row="true">
           <Icons.Resize></Icons.Resize>

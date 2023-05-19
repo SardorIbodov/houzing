@@ -19,13 +19,13 @@ const Container = styled.div`
 `;
 
 const Icons = styled.div``;
-Icons.search = styled(search)`
+Icons.Search = styled(search)`
   margin-right: 8px;
 `;
-Icons.houses = styled(houses)`
+Icons.Houses = styled(houses)`
   margin-right: 8px;
 `;
-Icons.filter = styled(filter)`
+Icons.Filter = styled(filter)`
   margin-right: 8px;
 `;
 
@@ -33,6 +33,7 @@ const MenuWrapper = styled.div`
   gap: 20px;
   padding: 30px;
   background: #fff;
+  border-radius: 5px;
 `;
 
 const Section = styled.div`
