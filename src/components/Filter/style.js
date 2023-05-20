@@ -3,12 +3,9 @@ import { ReactComponent as search } from "../../assets/icons/search.svg";
 import { ReactComponent as houses } from "../../assets/icons/houses.svg";
 import { ReactComponent as filter } from "../../assets/icons/filter.svg";
 
-const Wrapper = styled.div`
-  width: 100%;
-`;
-
 const Container = styled.div`
-  max-width: 1440px;
+	width: 100%;
+	max-width: 1440px;
   margin: 0 auto;
   padding: var(--padding);
   padding-top: 10px;
@@ -41,4 +38,4 @@ const Section = styled.div`
   margin-bottom: 20px;
 `;
 
-export { Container, Wrapper, Icons, MenuWrapper, Section };
+export { Container, Icons, MenuWrapper, Section };

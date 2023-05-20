@@ -1,12 +1,14 @@
 import { styled } from "styled-components";
 
 const Container = styled.div`
-  /* max-width: 1440px; */
-  display: flex;
-  flex-wrap: wrap;
-  padding: var(--padding);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  grid-auto-flow: row;
   gap: 20px;
-  justify-content: space-between;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--padding);
 `;
 
 export { Container };

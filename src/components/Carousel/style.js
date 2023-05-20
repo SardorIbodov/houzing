@@ -3,6 +3,7 @@ import { ReactComponent as arrowButton } from "../../assets/icons/arrowNext.svg"
 
 const Container = styled.div`
   position: relative;
+  height: fit-content;
 `;
 
 const Arrow = styled(arrowButton)`
