@@ -1,10 +1,4 @@
 import { styled } from "styled-components";
-import { ReactComponent as bed } from "../../assets/icons/bed.svg";
-import { ReactComponent as bath } from "../../assets/icons/bath.svg";
-import { ReactComponent as garage } from "../../assets/icons/car.svg";
-import { ReactComponent as ruler } from "../../assets/icons/ruler.svg";
-import { ReactComponent as heart } from "../../assets/icons/heart.svg";
-import { ReactComponent as resize } from "../../assets/icons/resize.svg";
 
 const Container = styled.div`
   width: 100%;
@@ -19,6 +13,7 @@ const Container = styled.div`
 
 const Img = styled.img`
   width: 100%;
+  border-radius: 3px;
   max-height: 380px;
   min-height: 350px;
 `;
@@ -29,6 +24,7 @@ const Content = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;

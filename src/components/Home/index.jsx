@@ -1,6 +1,6 @@
 import GenCarousel from "../Carousel";
 import HouseCard from "../HouseCard";
-import CategoryCard from "../CategoryCard";
+import Category from "../Category";
 import { Container } from "./style";
 
 export const Home = () => {
@@ -8,7 +8,7 @@ export const Home = () => {
     <Container>
       <GenCarousel />
       <HouseCard />
-      <CategoryCard />
+      <Category />
     </Container>
   );
 };

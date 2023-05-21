@@ -27,7 +27,7 @@ export const HouseCard = ({ data = {} }) => {
         <Details>
           <Details.Item>
             <Icons.Bed />
-            <div className="info">{houseDetails?.beds || 0} Bed</div>
+            <div className="info">{houseDetails?.room || 0} Room</div>
           </Details.Item>
           <Details.Item>
             <Icons.Bath />
