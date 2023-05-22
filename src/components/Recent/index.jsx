@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Container, Content } from "./style";
-import CarouselCard from "../CategoryCard";
-import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
+import Slider from "react-slick";
+import HouseCard from "../HouseCard";
+import { Container, Content } from "./style";
 
 const { REACT_APP_BASE_URL: url } = process.env;
 
@@ -11,24 +11,25 @@ const settings = {
   centerMode: true,
   infinite: true,
   centerPadding: "25px",
-  slidesToShow: 3.5,
+  slidesToShow: 2.75,
   speed: 500,
   dots: true,
 };
-export const Category = () => {
+export const Recent = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(`${url}/categories/list`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    })
+    fetch(`${url}/houses/list`)
       .then((res) => res.json())
-      .then((res) => setData(res.data));
+      .then((res) => {
+        setData(res?.data || []);
+      });
   }, []);
+
   return (
     <Container>
       <Content>
-        <h3 className="title">Category</h3>
+        <h3 className="title">Recent Properties for Rent</h3>
         <h4 className="info">
           Nulla quis curabitur velit volutpat auctor bibendum consectetur sit.
         </h4>
@@ -36,7 +37,7 @@ export const Category = () => {
       <Slider {...settings}>
         {data.map((card) => {
           return (
-            <CarouselCard
+            <HouseCard
               onClick={() => navigate(`/properties?category_id=${card.id}`)}
               data={card}
               key={card.id}
@@ -48,4 +49,4 @@ export const Category = () => {
   );
 };
 
-export default Category;
+export default Recent;

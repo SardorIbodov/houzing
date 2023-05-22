@@ -13,7 +13,6 @@ export const Filter = () => {
     cityRef = useRef(),
     zipRef = useRef(),
     roomsRef = useRef(),
-    sortRef = useRef(),
     minPriceRef = useRef(),
     maxPriceRef = useRef(),
     { REACT_APP_BASE_URL: url } = process.env;

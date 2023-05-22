@@ -6,18 +6,17 @@ const Container = styled.div`
   margin: auto;
   width: 100%;
   max-width: 1440px;
-  padding: 96px 130px;
+  padding: 92px 130px 48px 130px;
   position: relative;
 `;
 
 const Content = styled.div`
-  margin-bottom: 32px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
   row-gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 32px;
 `;
 
 export { Container, Content };

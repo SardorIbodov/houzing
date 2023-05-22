@@ -10,10 +10,14 @@ const Container = styled.div`
   width: 100%;
   max-width: 380px;
   min-width: 330px;
-  height: 430px;
-  filter: drop-shadow(0px 20px 38px rgba(0, 0, 0, 0.06))
-    drop-shadow(0px 7px 46px rgba(0, 0, 0, 0.06))
-    drop-shadow(0px 8px 15px rgba(0, 0, 0, 0.06));
+  border: 1px solid #e6e9ec;
+  &:hover {
+    filter: drop-shadow(0px 20px 38px rgba(0, 0, 0, 0.06))
+      drop-shadow(0px 7px 46px rgba(0, 0, 0, 0.06))
+      drop-shadow(0px 8px 15px rgba(0, 0, 0, 0.06));
+  }
+  cursor: pointer;
+  border-radius: 2px;
 `;
 
 const Img = styled.img`
@@ -21,6 +25,7 @@ const Img = styled.img`
   max-height: 220px;
   min-height: 220px;
   height: 220px;
+  border-radius: 2px;
 `;
 
 const Content = styled.div`
@@ -74,6 +79,7 @@ const Footer = styled.div`
   padding: 8px 20px;
   border-top: 1px solid #e6e9ec;
   background-color: #fff;
+  border-radius: 0 0 2px 2px;
 `;
 
 export { Container, Img, Content, Details, Icons, Footer };

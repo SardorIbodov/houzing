@@ -1,6 +1,5 @@
-import { Container, Content, Details, Icons, Footer } from "./style";
+import { Container, Content, Details, Icons, Footer, Img } from "./style";
 import noImg from "../../assets/imgs/noimg.png";
-import { Img } from "./style";
 
 export const HouseCard = ({ data = {} }) => {
   const {

@@ -22,19 +22,18 @@ body {
 }
 
 .title {
-  font-family: "Montserrat";
-  font-style: normal;
+  margin: 0;
+  padding: 0;
   font-weight: 600;
   font-size: 28px;
   line-height: 36px;
-  text-align: center;
   letter-spacing: -0.02em;
   color: #0d263b;
 }
 
 .subTitle {
-  font-family: "Montserrat";
-  font-style: normal;
+  margin: 0;
+  padding: 0;
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
@@ -42,6 +41,8 @@ body {
 }
 
 .info {
+  margin: 0;
+  padding: 0;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
@@ -56,7 +57,7 @@ body {
 
 .slick-prev:before,
 .slick-next:before {
-  color: red;
+  color: black;
   font-size: 25px;
 }
 
