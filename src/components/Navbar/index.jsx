@@ -1,6 +1,14 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { Container, Wrapper, Section, Logo, Link, Main } from "./style";
+import {
+  Container,
+  Wrapper,
+  Section,
+  Logo,
+  Link,
+  Main,
+  Profile,
+} from "./style";
 import { navbar } from "../../utils/navbar";
 import { Button } from "../Generic";
 import Filter from "../Filter";
@@ -8,6 +16,7 @@ import Footer from "../Footer";
 
 export const Navbar = () => {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   return (
     <Container>
@@ -29,9 +38,13 @@ export const Navbar = () => {
             })}
           </Section>
           <Section>
-            <Button type="dark" onClick={() => navigate("/signin")}>
-              Sign in
-            </Button>
+            {token ? (
+              <Profile />
+            ) : (
+              <Button type="dark" onClick={() => navigate("/signin")}>
+                Sign in
+              </Button>
+            )}
           </Section>
         </Wrapper>
       </Main>

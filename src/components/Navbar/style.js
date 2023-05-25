@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
-
 import { ReactComponent as logoImg } from "../../assets/icons/logo.svg";
 import { NavLink } from "react-router-dom";
+import { ReactComponent as User } from "../../assets/icons/profile.svg";
 
 const Container = styled.div`
   display: flex;
@@ -49,4 +49,8 @@ const Link = styled(NavLink)`
   color: #fff;
 `;
 
-export { Container, Wrapper, Section, Logo, Link, Main };
+const Profile = styled(User)`
+  cursor: pointer;
+`;
+
+export { Container, Wrapper, Section, Logo, Link, Main, Profile };
