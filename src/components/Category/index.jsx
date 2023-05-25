@@ -3,8 +3,7 @@ import { Container, Content } from "./style";
 import CarouselCard from "../CategoryCard";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
-
-const { REACT_APP_BASE_URL: url } = process.env;
+import useRequest from "../../hooks/useRequest";
 
 const settings = {
   className: "center",
@@ -17,14 +16,14 @@ const settings = {
 };
 export const Category = () => {
   const navigate = useNavigate();
+  const request = useRequest();
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(`${url}/categories/list`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    })
-      .then((res) => res.json())
-      .then((res) => setData(res.data));
-  }, []);
+    request({
+      url: "/categories/list",
+      token: localStorage.getItem("token"),
+    }).then((res) => setData(res.data));
+  }, [request]);
   return (
     <Container>
       <Content>
@@ -34,7 +33,7 @@ export const Category = () => {
         </h4>
       </Content>
       <Slider {...settings}>
-        {data.map((card) => {
+        {data?.map((card) => {
           return (
             <CarouselCard
               onClick={() => navigate(`/properties?category_id=${card.id}`)}

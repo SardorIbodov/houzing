@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Dropdown } from "antd";
-import { Input, Button } from "../Generic";
+import { Dropdown, Select, Space } from "antd";
 import { Container, Icons, MenuWrapper, Section } from "./style";
+import { Input, Button } from "../Generic";
 import uzeReplace from "../../hooks/useReplace";
 import useSearch from "../../hooks/useSearch";
-import { Select, Space } from "antd";
+import useRequest from "../../hooks/useRequest";
 
 export const Filter = () => {
   const countryRef = useRef(),
@@ -16,21 +16,22 @@ export const Filter = () => {
     minPriceRef = useRef(),
     maxPriceRef = useRef(),
     { REACT_APP_BASE_URL: url } = process.env;
+
   const onChange = ({ target: { name, value } }) => {
     navigate(`${location?.pathname}${uzeReplace(name, value)}`);
   };
   const navigate = useNavigate();
   const location = useLocation();
   const query = useSearch();
+  const request = useRequest();
 
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(`${url}/categories/list`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    })
-      .then((res) => res.json())
-      .then((res) => setData(res.data));
-  }, [url]);
+    request({
+      token: localStorage.getItem("token"),
+      url: "/categories/list",
+    }).then((res) => setData(res?.data));
+  }, [url, request]);
 
   const onChangeCategory = (category_id) => {
     navigate(`/properties/${uzeReplace("category_id", category_id)}`);

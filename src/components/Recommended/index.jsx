@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import HouseCard from "../HouseCard";
 import { Container, Content } from "./style";
-
-const { REACT_APP_BASE_URL: url } = process.env;
+import useRequest from "../../hooks/useRequest";
 
 const settings = {
   className: "center",
@@ -17,14 +16,15 @@ const settings = {
 };
 export const Recommended = () => {
   const navigate = useNavigate();
+  const request = useRequest();
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(`${url}/houses/list`)
-      .then((res) => res.json())
-      .then((res) => {
-        setData(res?.data || []);
-      });
-  }, []);
+    request({
+      url: "/houses/list",
+    }).then((res) => {
+      setData(res?.data || []);
+    });
+  }, [request]);
 
   return (
     <Container>
@@ -38,7 +38,7 @@ export const Recommended = () => {
         {data.map((card) => {
           return (
             <HouseCard
-              onClick={() => navigate(`/properties?category_id=${card.id}`)}
+              onClick={() => navigate(`/properties/${card.id}`)}
               data={card}
               key={card.id}
             />

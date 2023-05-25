@@ -11,6 +11,7 @@ import { ReactComponent as logoImg } from "../../assets/icons/logo.svg";
 const Wrapper = styled.div`
   background: #0d263b;
   padding: 48px 0 0 0;
+	margin-top: 48px;
 `;
 
 const Container = styled.div`

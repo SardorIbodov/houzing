@@ -1,7 +1,7 @@
 import { Container, Content, Details, Icons, Footer, Img } from "./style";
 import noImg from "../../assets/imgs/noimg.png";
 
-export const HouseCard = ({ data = {} }) => {
+export const HouseCard = ({ data = {}, onClick }) => {
   const {
     attachments,
     address,
@@ -14,7 +14,7 @@ export const HouseCard = ({ data = {} }) => {
     category,
   } = data;
   return (
-    <Container>
+    <Container onClick={onClick}>
       <Img src={(attachments && attachments[0].imgPath) || noImg} />
       <Content>
         <div className="subTitle inline">
