@@ -1,5 +1,8 @@
 import { Container, Content, Details, Icons, Footer, Img } from "./style";
 import noImg from "../../assets/imgs/noimg.png";
+import { message } from "antd";
+import { useContext } from "react";
+import { PropertiesContext } from "../../context/Properties";
 
 export const HouseCard = ({ data = {}, onClick }) => {
   const {
@@ -12,16 +15,51 @@ export const HouseCard = ({ data = {}, onClick }) => {
     salePrice,
     price,
     category,
+    favorite,
+    id,
   } = data;
+  const [state] = useContext(PropertiesContext);
+  const token = localStorage.getItem("token");
+  const [messageApi, contextHolder] = message.useMessage();
+  const save = (event) => {
+    event.stopPropagation();
+    token &&
+      fetch(
+        `http://localhost:8081/api/v1/houses/addFavourite/${id}?favourite=${!favorite}`,
+        {
+          method: "PUT",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          if (favorite) {
+            res?.success &&
+              messageApi.open({
+                type: "warning",
+                content: "Disliked",
+              });
+          } else {
+            res?.success &&
+              messageApi.open({
+                type: "success",
+                content: "Liked",
+              });
+          }
+          state.refetch && state.refetch();
+        });
+  };
   return (
     <Container onClick={onClick}>
+      {contextHolder}
       <Img src={(attachments && attachments[0].imgPath) || noImg} />
       <Content>
         <div className="subTitle inline">
           {city}, {country}, {description}
         </div>
         <div className="info">
-          {address || "Quincy St, Brooklyn, NY, USA"} | {category?.name || "Category"}
+          {address || "Quincy St, Brooklyn, NY, USA"} |{" "}
+          {category?.name || "Category"}
         </div>
         <Details>
           <Details.Item>
@@ -51,7 +89,9 @@ export const HouseCard = ({ data = {}, onClick }) => {
         </Details.Item>
         <Details.Item row="true">
           <Icons.Resize></Icons.Resize>
-          <Icons.Heart></Icons.Heart>
+          {token && (
+            <Icons.Heart favorite={favorite} onClick={save}></Icons.Heart>
+          )}
         </Details.Item>
       </Footer>
     </Container>

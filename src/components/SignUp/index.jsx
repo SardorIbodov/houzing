@@ -1,55 +1,46 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { message } from "antd";
 import Input from "../Generic/Input";
 import Button from "../Generic/Button";
 import { Content } from "./style";
-export const SignIn = () => {
+export const SignUp = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [body, setBody] = useState({});
-  const navigate = useNavigate();
   const onChange = ({ target: { value, placeholder } }) => {
     setBody({ ...body, [placeholder]: value });
   };
   const onSubmit = () => {
-    fetch(`http://localhost:8081/api/public/auth/login`, {
+    fetch(`http://localhost:8081/api/public/auth/register`, {
       method: "POST",
-      body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.authenticationToken) {
-          messageApi.open({
+      body: JSON.stringify(body),
+    }).then((res) => {
+      res.ok
+        ? messageApi.open({
             type: "success",
-            content: "Logged in",
+            content: "Account created",
+          })
+        : messageApi.open({
+            type: "warning",
+            content: "Something went wrong!",
           });
-          localStorage.setItem("token", res.authenticationToken);
-          setTimeout(() => {
-            navigate("/home");
-            window.location.reload();
-          }, 500);
-        } else {
-          messageApi.open({
-            type: "error",
-            content: "Password or email is incorrect!",
-          });
-        }
-      });
+    });
   };
   return (
     <Content>
       {contextHolder}
-      <h3 className="subTitle">Sign in</h3>
+      <h3 className="subTitle">Sign up</h3>
       <Input type="text" onChange={onChange} placeholder="email" />
+      <Input type="text" onChange={onChange} placeholder="firstname" />
+      <Input type="text" onChange={onChange} placeholder="lastname" />
       <Input type="text" onChange={onChange} placeholder="password" />
       <Button width={"100%"} onClick={onSubmit}>
-        Login
+        Register
       </Button>
     </Content>
   );
 };
 
-export default SignIn;
+export default SignUp;

@@ -61,14 +61,14 @@ Icons.Heart = styled(heart)`
   display: flex;
   justify-content: center;
   align-items: center;
-  &:active,
-  &:hover {
-    background-color: #f6f8f9;
+  background: ${({ favorite }) => (favorite ? "red" : "#f6f8f9")};
+  cursor: pointer;
+  & path {
+    fill: ${({ favorite }) => favorite && "white"};
   }
   &:active {
     transform: scale(0.9);
   }
-  cursor: pointer;
 `;
 Icons.Resize = styled(resize)``;
 

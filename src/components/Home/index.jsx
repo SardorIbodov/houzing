@@ -7,12 +7,13 @@ import Recent from "../Recent";
 import Banner from "../Banner";
 
 export const Home = () => {
+  const token = localStorage.getItem("token");
   return (
     <Container>
       <GenCarousel />
       <Recommended />
       <Why />
-      <Category />
+      {token && <Category />}
       <Banner />
       <Recent />
     </Container>

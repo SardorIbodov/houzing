@@ -3,7 +3,7 @@ import { Container, Content } from "./style";
 import CarouselCard from "../CategoryCard";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
-import useRequest from "../../hooks/useRequest";
+const { REACT_APP_BASE_URL } = process.env;
 
 const settings = {
   className: "center",
@@ -14,16 +14,21 @@ const settings = {
   speed: 500,
   dots: true,
 };
+
+const token = localStorage.getItem("token");
 export const Category = () => {
   const navigate = useNavigate();
-  const request = useRequest();
   const [data, setData] = useState([]);
   useEffect(() => {
-    request({
-      url: "/categories/list",
-      token: localStorage.getItem("token"),
-    }).then((res) => setData(res.data));
-  }, [request]);
+    token &&
+      fetch(`${REACT_APP_BASE_URL}/categories/list`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => setData(res?.data || []));
+  }, []);
   return (
     <Container>
       <Content>

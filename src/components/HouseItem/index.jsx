@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import useRequest from "../../hooks/useRequest";
 import { Button, Input } from "../Generic";
 import YandexMaps from "../Generic/Yandex Maps";
 import Recent from "../Recent";
@@ -17,24 +16,23 @@ import {
   Maps,
 } from "./style";
 import noUser from "../../assets/imgs/no-user.png";
+const { REACT_APP_BASE_URL } = process.env;
 
 export const HouseItem = () => {
   const [data, setData] = useState({});
   const params = useParams();
-  const request = useRequest();
   useEffect(() => {
-    request({
-      url: `/houses/id/${params.id}`,
-      token: localStorage.getItem("token"),
-    }).then((res) => {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
+    fetch(`${REACT_APP_BASE_URL}/houses/id/${params.id}`)
+      .then((res) => res.json())
+      .then((res) => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+        setData(res?.data || {});
       });
-      setData(res.data);
-    });
-  }, [params.id, request]);
+  }, [params.id]);
   return (
     <>
       <Wrapper>

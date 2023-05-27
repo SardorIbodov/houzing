@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { Container, Content, Header } from "./style";
 import HouseCard from "../HouseCard";
 import { useLocation, useNavigate } from "react-router-dom";
-// import useRequest from "../../hooks/useRequest";
 const { REACT_APP_BASE_URL } = process.env;
 
-export const Properties = () => {
+export const MyProfile = () => {
   const [data, setData] = useState([]);
   const { search } = useLocation();
   const navigate = useNavigate();
@@ -42,4 +41,4 @@ export const Properties = () => {
   );
 };
 
-export default Properties;
+export default MyProfile;

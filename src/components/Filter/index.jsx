@@ -5,7 +5,6 @@ import { Container, Icons, MenuWrapper, Section } from "./style";
 import { Input, Button } from "../Generic";
 import uzeReplace from "../../hooks/useReplace";
 import useSearch from "../../hooks/useSearch";
-import useRequest from "../../hooks/useRequest";
 
 export const Filter = () => {
   const countryRef = useRef(),
@@ -15,7 +14,7 @@ export const Filter = () => {
     roomsRef = useRef(),
     minPriceRef = useRef(),
     maxPriceRef = useRef(),
-    { REACT_APP_BASE_URL: url } = process.env;
+    { REACT_APP_BASE_URL } = process.env;
 
   const onChange = ({ target: { name, value } }) => {
     navigate(`${location?.pathname}${uzeReplace(name, value)}`);
@@ -23,15 +22,17 @@ export const Filter = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const query = useSearch();
-  const request = useRequest();
+  const token = localStorage.getItem("token");
 
   const [data, setData] = useState([]);
   useEffect(() => {
-    request({
-      token: localStorage.getItem("token"),
-      url: "/categories/list",
-    }).then((res) => setData(res?.data));
-  }, [url, request]);
+    token &&
+      fetch(`${REACT_APP_BASE_URL}/categories/list`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((res) => setData(res?.data || []));
+  }, []);
 
   const onChangeCategory = (category_id) => {
     navigate(`/properties/${uzeReplace("category_id", category_id)}`);
@@ -112,20 +113,22 @@ export const Filter = () => {
                     ]}
                   />
                 </Space>
-                <Space wrap>
-                  <Select
-                    onChange={onChangeCategory}
-                    value={
-                      data[query.get("category_id") - 1]?.name ||
-                      "Select category"
-                    }
-                    style={{
-                      width: 200,
-                      height: 44,
-                    }}
-                    options={optionsCategory}
-                  />
-                </Space>
+                {token && (
+                  <Space wrap>
+                    <Select
+                      onChange={onChangeCategory}
+                      value={
+                        data[query.get("category_id") - 1]?.name ||
+                        "Select category"
+                      }
+                      style={{
+                        width: 200,
+                        height: 44,
+                      }}
+                      options={optionsCategory}
+                    />
+                  </Space>
+                )}
               </Section>
               <h3 className="subTitle">Price</h3>
               <Section>

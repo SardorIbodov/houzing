@@ -6,12 +6,16 @@ import "./index.css";
 import Root from "./root";
 import RootContext from "./context";
 import "antd/dist/reset.css";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const queryClient = new QueryClient();
 root.render(
   <React.StrictMode>
-    <RootContext>
-      <Root />
-    </RootContext>
+    <QueryClientProvider client={queryClient}>
+      <RootContext>
+        <Root />
+      </RootContext>
+    </QueryClientProvider>
   </React.StrictMode>
 );
