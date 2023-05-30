@@ -71,6 +71,11 @@ body {
   border-radius: 2px;
 }
 
+:where(.css-dev-only-do-not-override-ed5zg0).ant-checkbox-wrapper
+  + .ant-checkbox-wrapper {
+  margin-inline-start: 0;
+}
+
 .ant-tabs-nav-wrap {
   display: flex;
   justify-content: center;

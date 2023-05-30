@@ -38,7 +38,7 @@ export const Navbar = () => {
     {
       key: 1,
       label: (
-        <div data-name="my-profile" onClick={onClickProfile}>
+        <div data-name="myprofile" onClick={onClickProfile}>
           My Profile
         </div>
       ),
@@ -46,21 +46,13 @@ export const Navbar = () => {
     {
       key: 2,
       label: (
-        <div data-name="my-properties" onClick={onClickProfile}>
-          My Properties
-        </div>
-      ),
-    },
-    {
-      key: 3,
-      label: (
         <div data-name="favourites" onClick={onClickProfile}>
           Favourites
         </div>
       ),
     },
     {
-      key: 4,
+      key: 3,
       label: (
         <div data-name="logout" onClick={onClickProfile}>
           Log out

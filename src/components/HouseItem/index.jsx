@@ -33,6 +33,7 @@ export const HouseItem = () => {
         setData(res?.data || {});
       });
   }, [params.id]);
+  console.log(data);
   return (
     <>
       <Wrapper>
@@ -99,7 +100,7 @@ export const HouseItem = () => {
           </Description>
           <Maps>
             <div className="subTitle">Location</div>
-            <YandexMaps location={data.location} />
+            <YandexMaps location={{ latitude: 38.8612, longitude: 65.7847 }} />
           </Maps>
         </Container>
         <Container className="user" flex={1}>

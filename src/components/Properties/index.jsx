@@ -28,7 +28,7 @@ export const Properties = () => {
         </p>
       </Header>
       <Content>
-        {data.map((value) => {
+        {data?.map((value) => {
           return (
             <HouseCard
               onClick={() => onSelect(value.id)}

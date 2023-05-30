@@ -10,13 +10,13 @@ export const HouseCard = ({ data = {}, onClick }) => {
     address,
     city,
     country,
-    description,
     houseDetails,
     salePrice,
     price,
     category,
     favorite,
     id,
+		name
   } = data;
   const [state] = useContext(PropertiesContext);
   const token = localStorage.getItem("token");
@@ -52,10 +52,10 @@ export const HouseCard = ({ data = {}, onClick }) => {
   return (
     <Container onClick={onClick}>
       {contextHolder}
-      <Img src={(attachments && attachments[0].imgPath) || noImg} />
+      <Img src={(attachments && attachments[0]?.imgPath) || noImg} />
       <Content>
         <div className="subTitle inline">
-          {city}, {country}, {description}
+         {name}, {city}, {country}
         </div>
         <div className="info">
           {address || "Quincy St, Brooklyn, NY, USA"} |{" "}

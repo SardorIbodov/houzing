@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Container, Content, Header } from "./style";
 import HouseCard from "../HouseCard";
 import { useLocation, useNavigate } from "react-router-dom";

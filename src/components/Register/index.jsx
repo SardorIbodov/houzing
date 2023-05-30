@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Container } from "./style";
-import { message, Tabs } from "antd";
+import { Tabs } from "antd";
 import SignIn from "../SignIn";
 import SignUp from "../SignUp";
 export const Register = () => {
