@@ -129,6 +129,30 @@ User.Img = styled.img`
 
 const Maps = styled.div``;
 
+const ImageContainer = styled.div`
+  width: 100%;
+  max-width: 1440px;
+  padding: var(--padding);
+  margin: 24px auto;
+  display: flex;
+  column-gap: 20px;
+`;
+ImageContainer.Main = styled.img`
+  width: 100%;
+  max-width: 580px;
+  max-height: 400px;
+`;
+ImageContainer.Secondary = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+`
+ImageContainer.Item = styled.img`
+  width: 100%;
+  max-width: 280px;
+  max-height: 190px;
+`;
+
 export {
   Container,
   Content,
@@ -139,4 +163,5 @@ export {
   Wrapper,
   User,
   Maps,
+  ImageContainer,
 };

@@ -16,17 +16,19 @@ export const SignUp = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
-    }).then((res) => {
-      res.ok
-        ? messageApi.open({
-            type: "success",
-            content: "Account created",
-          })
-        : messageApi.open({
-            type: "warning",
-            content: "Something went wrong!",
-          });
-    });
+    })
+      .then((res) => {
+        res.ok
+          ? messageApi.open({
+              type: "success",
+              content: "Account created",
+            })
+          : messageApi.open({
+              type: "warning",
+              content: "Something went wrong!",
+            });
+      })
+      .catch((res) => console.log("Something went wrong from backend!!!"));
   };
   return (
     <Content>

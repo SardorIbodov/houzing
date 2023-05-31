@@ -31,7 +31,10 @@ export const Filter = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())
-        .then((res) => setData(res?.data || []));
+        .then((res) => setData(res?.data || []))
+        .catch((res) => {
+          console.log("Something went wrong from backend");
+        });
   }, []);
 
   const onChangeCategory = (category_id) => {

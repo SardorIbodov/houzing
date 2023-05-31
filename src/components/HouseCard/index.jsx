@@ -47,7 +47,7 @@ export const HouseCard = ({ data = {}, onClick }) => {
               });
           }
           state.refetch && state.refetch();
-        });
+        }).catch(res => console.log("Something went wrong from backend"));
   };
   return (
     <Container onClick={onClick}>

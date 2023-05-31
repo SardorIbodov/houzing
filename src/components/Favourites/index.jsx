@@ -17,15 +17,19 @@ export const Favourites = () => {
   const { refetch, data } = useQuery(
     [search],
     async () => {
-      const res = await fetch(
-        `${REACT_APP_BASE_URL}/houses/getAll/favouriteList`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      return await res.json();
+      try {
+        const res = await fetch(
+          `${REACT_APP_BASE_URL}/houses/getAll/favouriteList`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        return await res.json();
+      } catch {
+				console.log("Something went wrong from backend!!!")
+			}
     },
     {
       onSuccess: (res) => {

@@ -13,7 +13,11 @@ export const MyProfile = () => {
   const { data, refetch } = useQuery([], async () => {
     return fetch(`${REACT_APP_BASE_URL}/houses/me`, {
       headers: { Authorization: `Bearer ${token}` },
-    }).then((res) => res.json());
+    })
+      .then((res) => res.json())
+      .catch((res) => {
+        console.log("Something went wrong from backend");
+      });
   });
 
   const [messageApi, contextHolder] = message.useMessage();
@@ -22,19 +26,23 @@ export const MyProfile = () => {
     fetch(`${REACT_APP_BASE_URL}/houses/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
-    }).then((res) => {
-      if (res?.ok) {
-        messageApi.open({
-          type: "success",
-          content: "Successfully deleted",
-        });
-        refetch();
-      } else
-        messageApi.open({
-          type: "error",
-          content: "Something went wrong",
-        });
-    });
+    })
+      .then((res) => {
+        if (res?.ok) {
+          messageApi.open({
+            type: "success",
+            content: "Successfully deleted",
+          });
+          refetch();
+        } else
+          messageApi.open({
+            type: "error",
+            content: "Something went wrong",
+          });
+      })
+      .catch((res) => {
+        console.log("Something went wrong from backend");
+      });
   };
 
   const columns = [

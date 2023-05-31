@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+
+import { useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
 
 import { Container, MenuWrapper, Section, Group, DeleteIcon } from "./style";
@@ -12,6 +13,7 @@ export const AddHouse = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const { REACT_APP_BASE_URL } = process.env;
   const { id } = useParams();
+  const addImgRef = useRef();
 
   const [imgs, setImgs] = useState([]);
   const [img, setImg] = useState("");
@@ -32,14 +34,23 @@ export const AddHouse = () => {
         .then((res) => {
           setImgs(res?.data.attachments);
           setInitial({ ...res?.data });
+        })
+        .catch((res) => {
+          console.log("Something went wrong from backend");
         });
   }, []);
 
   const addImg = () => {
-    if (imgs.length <= 4 && img) {
+    if (imgs.length < 5 && img) {
       setImgs([...imgs, { imgPath: img }]);
       setImg("");
+    } else {
+      messageApi.open({
+        type: "warning",
+        content: "Only 5 images you can upload!",
+      });
     }
+    addImgRef.current.value = "";
   };
 
   let url = id
@@ -60,15 +71,19 @@ export const AddHouse = () => {
           ...values,
           attachments: imgs,
         }),
-      }).then((res) => {
-        if (res.ok) {
-          navigate("/myprofile");
-        } else
-          messageApi.open({
-            type: "warning",
-            content: "Opps, something went wrong! Try again",
-          });
-      });
+      })
+        .then((res) => {
+          if (res.ok) {
+            navigate("/myprofile");
+          } else
+            messageApi.open({
+              type: "warning",
+              content: "Opps, something went wrong! Try again",
+            });
+        })
+        .catch((res) => {
+          console.log("Something went wrong from backend");
+        });
     },
   });
 
@@ -180,6 +195,7 @@ export const AddHouse = () => {
           </Section>
           <Section>
             <Input
+              ref={addImgRef}
               onChange={({ target: { value } }) => {
                 setImg(value);
               }}
@@ -196,6 +212,7 @@ export const AddHouse = () => {
                 justifyContent: "center",
                 background: " #0061df",
                 color: "white",
+                cursor: "pointer",
               }}
             >
               Add image URL

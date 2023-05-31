@@ -14,8 +14,10 @@ import {
   Wrapper,
   User,
   Maps,
+  ImageContainer,
 } from "./style";
 import noUser from "../../assets/imgs/no-user.png";
+import noHouse from "../../assets/imgs/nohouse.png";
 const { REACT_APP_BASE_URL } = process.env;
 
 export const HouseItem = () => {
@@ -31,11 +33,57 @@ export const HouseItem = () => {
           behavior: "smooth",
         });
         setData(res?.data || {});
+      })
+      .catch((res) => {
+        console.log("Something went wrong from backend!!!");
       });
   }, [params.id]);
-  console.log(data);
   return (
     <>
+      <ImageContainer>
+        <ImageContainer.Main
+          src={
+            (data.attachments &&
+              data.attachments[0] &&
+              data.attachments[0]?.imgPath) ||
+            noHouse
+          }
+        />
+        <ImageContainer.Secondary>
+          <ImageContainer.Item
+            src={
+              (data.attachments &&
+                data.attachments[1] &&
+                data.attachments[1]?.imgPath) ||
+              noHouse
+            }
+          />
+          <ImageContainer.Item
+            src={
+              (data.attachments &&
+                data.attachments[2] &&
+                data.attachments[2]?.imgPath) ||
+              noHouse
+            }
+          />
+          <ImageContainer.Item
+            src={
+              (data.attachments &&
+                data.attachments[3] &&
+                data.attachments[3]?.imgPath) ||
+              noHouse
+            }
+          />
+          <ImageContainer.Item
+            src={
+              (data.attachments &&
+                data.attachments[4] &&
+                data.attachments[4]?.imgPath) ||
+              noHouse
+            }
+          />
+        </ImageContainer.Secondary>
+      </ImageContainer>
       <Wrapper>
         <Container flex={3}>
           <Content>

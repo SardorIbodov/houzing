@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import HouseCard from "../HouseCard";
 import { Container, Content } from "./style";
-// import useRequest from "../../hooks/useRequest";
 const { REACT_APP_BASE_URL } = process.env;
 
 const settings = {
@@ -18,16 +17,11 @@ const settings = {
 export const Recent = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  // const request = useRequest();
   useEffect(() => {
     fetch(`${REACT_APP_BASE_URL}/houses/list`)
       .then((res) => res.json())
-      .then((res) => setData(res?.data || []));
-    // request({
-    //   url: "/houses/list",
-    // }).then((res) => {
-    //   setData(res?.data || []);
-    // });
+      .then((res) => setData(res?.data || []))
+      .catch((res) => console.log("Something went wrong from backend!!!"));
   }, []);
 
   return (

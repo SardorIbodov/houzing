@@ -37,7 +37,8 @@ export const SignIn = () => {
             content: "Password or email is incorrect!",
           });
         }
-      });
+      })
+      .catch((res) => console.log("Something went wrong from backend!!!"));
   };
   return (
     <Content>

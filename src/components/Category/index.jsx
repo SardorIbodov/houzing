@@ -27,7 +27,10 @@ export const Category = () => {
         },
       })
         .then((res) => res.json())
-        .then((res) => setData(res?.data || []));
+        .then((res) => setData(res?.data || []))
+        .catch((res) => {
+          console.log("Something went wrong from backend");
+        });
   }, []);
   return (
     <Container>

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Container, Content, Header } from "./style";
 import HouseCard from "../HouseCard";
 import { useLocation, useNavigate } from "react-router-dom";
-// import useRequest from "../../hooks/useRequest";
 const { REACT_APP_BASE_URL } = process.env;
 
 export const Properties = () => {
@@ -16,7 +15,10 @@ export const Properties = () => {
   useEffect(() => {
     fetch(`${REACT_APP_BASE_URL}/houses/list${search}`)
       .then((res) => res.json())
-      .then((res) => setData(res.data));
+      .then((res) => setData(res.data))
+      .catch((res) => {
+        console.log("Something went wrong from backend");
+      });
   }, [search]);
 
   return (
