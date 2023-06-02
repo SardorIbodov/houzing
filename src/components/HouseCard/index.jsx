@@ -18,6 +18,7 @@ export const HouseCard = ({ data = {}, onClick }) => {
     id,
 		name
   } = data;
+	const {REACT_APP_BASE_URL} = process.env;
   const [state] = useContext(PropertiesContext);
   const token = localStorage.getItem("token");
   const [messageApi, contextHolder] = message.useMessage();
@@ -25,7 +26,7 @@ export const HouseCard = ({ data = {}, onClick }) => {
     event.stopPropagation();
     token &&
       fetch(
-        `http://localhost:8081/api/v1/houses/addFavourite/${id}?favourite=${!favorite}`,
+        `${REACT_APP_BASE_URL}/houses/addFavourite/${id}?favourite=${!favorite}`,
         {
           method: "PUT",
           headers: { Authorization: `Bearer ${token}` },

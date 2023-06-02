@@ -12,7 +12,7 @@ export const SignIn = () => {
     setBody({ ...body, [placeholder]: value });
   };
   const onSubmit = () => {
-    fetch(`http://localhost:8081/api/public/auth/login`, {
+    fetch(`https://sardoribodov.jprq.live/api/public/auth/login`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {

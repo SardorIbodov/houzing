@@ -10,7 +10,7 @@ export const SignUp = () => {
     setBody({ ...body, [placeholder]: value });
   };
   const onSubmit = () => {
-    fetch(`http://localhost:8081/api/public/auth/register`, {
+    fetch(`https://sardoribodov.jprq.live/api/public/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
